@@ -1,0 +1,14 @@
+{% extends 'tickets/base.html' %}
+
+{% block content %}
+<h2>Detalle ticket</h2>
+{% if ticket %}
+<h5><b>ID:</b>{{ticket.id}}</h5>
+<h5><b>Nombre:</b>{{ticket.name}}</h5>
+<h5><b>Descripcion:</b>{{ticket.description}}</h5>
+<h5><b>Tecnico:</b>{{ticket.tech}}</h5>
+{% else %}
+<h2>No se encontro ticket</h2>
+{% endif %}
+<a class="btn btn-dark" href="{% url 'ticket_list' %}">Back home</a>
+{% endblock %}

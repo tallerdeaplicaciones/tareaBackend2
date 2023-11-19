@@ -1,0 +1,39 @@
+{% extends 'tickets/base.html' %}
+
+{% block content %}
+
+<h2>Formulario creacion Tickets</h2>
+
+<form id="ticket-form" action="" method="post" class="col-7 mx-auto">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <div class="is-grouped mt-5">
+        <button class="btn btn-success">Save</button>
+        <a class="btn btn-dark" href="{% url 'ticket_list' %}">Back to home</a>
+    </div>
+</form>
+
+{% endblock %}
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweeetalert2@10"></script>
+<script>
+    document.getElementById("ticket-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+        $.ajax({
+            url: "{% url 'ticket_ceate' %}",
+            type:"post",
+            data: $(this).seralize(),
+            success: function () {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Ticket creado exitosamente!',
+                }).then(function () {
+                    window.location.href = "{% url 'ticket_list' %}";
+                });
+            },
+            error: function (data) {
+                //Handle error if needed
+            }
+        });
+    });
+</script>
